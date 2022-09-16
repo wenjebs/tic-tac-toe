@@ -1,0 +1,20 @@
+* {
+    border: solid 1px black;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+.game-board {
+    display: grid;
+    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    height: 30vh;
+
+}
+
+.game-board>div {
+    display: flex;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    justify-content: center;
+    align-items: center;
+}
