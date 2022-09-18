@@ -37,3 +37,11 @@ const gameBoard = function() {
     eventListen();
     return {board};
 }();
+
+const createPlayer = function(name, marker) {
+    return {name, marker}
+};
+
+let playerOne = createPlayer('bob', 'X');
+let playerTwo = createPlayer('jon', 'O');
+let currentPlayer = playerOne;
