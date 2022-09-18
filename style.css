@@ -4,6 +4,14 @@
     margin: 0;
     text-decoration: none;
 }
+.players {
+    display: flex;
+    justify-content: center;
+}
+.players>div{
+    flex: 1;
+    text-align: center;
+}
 .game-board {
     display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
