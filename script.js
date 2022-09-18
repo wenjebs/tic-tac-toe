@@ -1,11 +1,11 @@
 const gameBoard = function() {
     // create array storing results
-    // let board = new Array(9).fill('X',0,5).fill('O',5,9);
     let board = new Array(9).fill('');
 
     // cache DOM
     const gridBoard = document.querySelector('.game-board');
-    
+    const playerOneDisplay = document.querySelector('.playerOne');
+    const playerTwoDisplay = document.querySelector('.playerTwo');
     // Render board
     const render = function(array) {
         gridBoard.replaceChildren();
@@ -39,12 +39,20 @@ const gameBoard = function() {
                 alert(`${playerOne.name} won!`)
                 resetBoard();
             }
+            if (tieCondition(board)) {
+                alert(`Tie!`)
+                resetBoard();
+            }
             currentPlayer = playerTwo;
         } else {
             board[index] = playerTwo.marker;
             render(board);
             if (winCondition(board)) {
                 alert(`${playerTwo.name} won!`)
+                resetBoard();
+            }
+            if (tieCondition(board)) {
+                alert(`Tie!`)
                 resetBoard();
             }
             currentPlayer = playerOne;
@@ -56,6 +64,9 @@ const gameBoard = function() {
         board = ['','','','','','','','',''];
         render(board);
         return;
+    }
+    const tieCondition = function(array) {
+        return (!array.includes(''));
     }
     const winCondition = function(array) {
         const horizontal = [0,3,6].map(num => {return [num, num+1,num+2]});
@@ -69,13 +80,16 @@ const gameBoard = function() {
     };
     render(board); 
     eventListen();
-    return {board};
+    return {playerOneDisplay, playerTwoDisplay};
 }();
 
 const createPlayer = function(name, marker) {
-    return {name, marker}
+    if (marker === 'X') gameBoard.playerOneDisplay.textContent = `Player One : ${name} (${marker})`
+    gameBoard.playerTwoDisplay.textContent = `Player Two : ${name} (${marker})`
+    return {name, marker};
 };
+
 
 let playerOne = createPlayer('bob', 'X');
 let playerTwo = createPlayer('jon', 'O');
-let currentPlayer = playerOne;
+let currentPlayer = playerOne; 
