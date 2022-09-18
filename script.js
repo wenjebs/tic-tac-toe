@@ -34,14 +34,29 @@ const gameBoard = function() {
         }
         if (currentPlayer===playerOne) {
             board[index] = playerOne.marker;
+            render(board);
+            if (winCondition(board)) {
+                alert(`${playerOne.name} won!`)
+                resetBoard();
+            }
             currentPlayer = playerTwo;
         } else {
             board[index] = playerTwo.marker;
+            render(board);
+            if (winCondition(board)) {
+                alert(`${playerTwo.name} won!`)
+                resetBoard();
+            }
             currentPlayer = playerOne;
         };
-        render(board);
+        
         eventListen();
     };
+    const resetBoard = function() {
+        board = ['','','','','','','','',''];
+        render(board);
+        return;
+    }
     const winCondition = function(array) {
         const horizontal = [0,3,6].map(num => {return [num, num+1,num+2]});
         const vertical = [0,1,2].map(num => {return [num, num+3,num+6]});
