@@ -42,7 +42,16 @@ const gameBoard = function() {
         render(board);
         eventListen();
     };
-
+    const winCondition = function(array) {
+        const horizontal = [0,3,6].map(num => {return [num, num+1,num+2]});
+        const vertical = [0,1,2].map(num => {return [num, num+3,num+6]});
+        const diagonal = [[0,4,8],[2,4,6]];
+        let winningArrays = [].concat(horizontal).concat(vertical).concat(diagonal);
+        let checkWin = winningArrays.some(winIndex => {
+            return (array[winIndex[0]] === currentPlayer.marker && array[winIndex[1]] === currentPlayer.marker && array[winIndex[2]] === currentPlayer.marker)
+        });
+        return checkWin;
+    };
     render(board); 
     eventListen();
     return {board};
