@@ -28,7 +28,17 @@ const gameBoard = function() {
     // replace grid text
     const replaceGridText = function() {
         let index = this.dataset.number;
-        board[index] = 'X';
+        if (board[index] === 'X'||board[index] === 'O') {
+            alert('stop u CANT DO THAT');
+            return;
+        }
+        if (currentPlayer===playerOne) {
+            board[index] = playerOne.marker;
+            currentPlayer = playerTwo;
+        } else {
+            board[index] = playerTwo.marker;
+            currentPlayer = playerOne;
+        };
         render(board);
         eventListen();
     };
